@@ -3,7 +3,7 @@
 	public boolean mouseDown (Event e, int x, int y){
 		// Test ob Ball getroffen wurde
 		if ((ball.getroffen(x, y))==true){
-			//Kr�fte berechnen
+			//Kraefte berechnen
 	       	ball.beschleunigen(x, y);
 	    }
 		return true;
@@ -20,7 +20,7 @@
 		// Berechnen der Distanz (Skalarprodukt)
 		double distance = Math.sqrt ((x*x) + (y*y));
 
-		// Wenn Distanz kleiner/gleich Ballradius && Klick in der Klickfl�che erfolgt, gilt der Ball als getroffen
+		// Wenn Distanz kleiner/gleich Ballradius && Klick in der Klickflaeche erfolgt, gilt der Ball als getroffen
 		if ((distance <= ballradius) && (maus_y <= klickflaeche)){
 			return true;
 		}
@@ -46,7 +46,7 @@
 		int kraftAnteile = x_positiv+y_positiv;
 		int x_kraft = (kraftProKlick/kraftAnteile)*x_positiv;
 		int y_kraft = (kraftProKlick/kraftAnteile)*y_positiv;
-		//Kr�fte den x und y Geschwindigkeiten des Balles anrechnen 
+		//Kraefte den x und y Geschwindigkeiten des Balles anrechnen 
 		//Klick unten links
 		if(x<=0 && y<=0){
 			x_speed = x_speed + x_kraft;
