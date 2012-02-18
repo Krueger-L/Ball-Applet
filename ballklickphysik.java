@@ -30,7 +30,7 @@
 	}
 	
 	private void beschleunigen(int maus_x, int maus_y){
-		// Bestimmen der Abst�nde
+		// Bestimmen der Abstaende
 		int x = maus_x - pos_x;
 		int y = maus_y - pos_y;
 		int x_positiv = x;
