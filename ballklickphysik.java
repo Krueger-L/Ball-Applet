@@ -10,6 +10,8 @@
 	}
 	
 	//************Ballklasse***************
+	//pos_x, pos_y, x_speed, y_speed : Zustandsvariablen
+	//ballradius, klickflaeche, kraftProKlick: gesetzte Variablen
 	public boolean getroffen(int maus_x, int maus_y){
 		// Bestimmen der Verbindungsvektoren
 		double x = maus_x - pos_x;
@@ -19,7 +21,7 @@
 		double distance = Math.sqrt ((x*x) + (y*y));
 
 		// Wenn Distanz kleiner/gleich Ballradius && Klick in der Klickfläche erfolgt, gilt der Ball als getroffen
-		if ((distance <= ballradius) && (maus_y <= klickfläche)){
+		if ((distance <= ballradius) && (maus_y <= klickflaeche)){
 			return true;
 		}
 		else{
