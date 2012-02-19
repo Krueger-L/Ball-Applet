@@ -11,7 +11,7 @@
 	
 	//************Ballklasse***************
 	//pos_x, pos_y, x_speed, y_speed : Zustandsvariablen
-	//ballradius, klickflaeche, kraftProKlick, linkerRand, rechterRand, obererRand: gesetzte Variablen
+	//ballradius, klickflaeche, kraftProKlick, linkerRand, rechterRand, obererRand, gravitation: gesetzte Variablen
 	public boolean getroffen(int maus_x, int maus_y){
 		// Bestimmen der Verbindungsvektoren
 		double x = maus_x - pos_x;
@@ -77,6 +77,8 @@
 		if(pos_y<(obererRand+radius)){
 			y_speed = y_speed*-1;
 		}
+		//Fallgeschwindigkeit/Zeit erhöhen
+		y_speed = y_speed + gravitation;
 		//Neue Position bestimmen
 		pos_x = pos_x+x_speed;
 		pos_y = pos_y+y_speed;
