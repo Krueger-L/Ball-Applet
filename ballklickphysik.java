@@ -1,7 +1,7 @@
 	//*************Mainklasse****************
 	// Auffangen des Mausereignisses mouseDown in Mainklasse
 	public boolean mouseDown (Event e, int x, int y){
-		// Test ob der Ball getroffen wurde
+		// Test ob der Ball getroffen  wurde
 		if ((ball.getroffen(x, y))==true){ 
 			//Kraefte berechnen
 	       	ball.beschleunigen(x, y);
