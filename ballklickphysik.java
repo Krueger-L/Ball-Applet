@@ -1,8 +1,8 @@
 	//*************Mainklasse****************
 	// Auffangen des Mausereignisses mouseDown in Mainklasse
 	public boolean mouseDown (Event e, int x, int y){
-		// Test ob Ball getroffen wurde
-		if ((ball.getroffen(x, y))==true){
+		// Test ob der Ball getroffen wurde
+		if ((ball.getroffen(x, y))==true){ 
 			//Kraefte berechnen
 	       	ball.beschleunigen(x, y);
 	    }
@@ -11,7 +11,7 @@
 	
 	//************Ballklasse***************
 	//pos_x, pos_y, x_speed, y_speed : Zustandsvariablen
-	//ballradius, klickflaeche, kraftProKlick: gesetzte Variablen
+	//ballradius, klickflaeche, kraftProKlick, linkerRand, rechterRand, obererRand: gesetzte Variablen
 	public boolean getroffen(int maus_x, int maus_y){
 		// Bestimmen der Verbindungsvektoren
 		double x = maus_x - pos_x;
@@ -21,7 +21,7 @@
 		double distance = Math.sqrt ((x*x) + (y*y));
 
 		// Wenn Distanz kleiner/gleich Ballradius && Klick in der Klickflaeche erfolgt, gilt der Ball als getroffen
-		if ((distance <= ballradius) && (maus_y <= klickflaeche)){
+		if ((distance <= ballradius) && (maus_y >= klickflaeche)){
 			return true;
 		}
 		else{
@@ -48,24 +48,37 @@
 		int y_kraft = (kraftProKlick/kraftAnteile)*y_positiv;
 		//Kraefte den x und y Geschwindigkeiten des Balles anrechnen 
 		//Klick unten links
-		if(x<=0 && y<=0){
+		if(x<=0 && y>=0){
 			x_speed = x_speed + x_kraft;
-			y_speed = y_speed + y_kraft;
+			y_speed = y_speed - y_kraft;
 		}
 		//Klick unten rechts
-		else if(x>=0 && y<=0){
-			x_speed = x_speed - x_kraft;
-			y_speed = y_speed + y_kraft;
-		}
-		//Klick oben rechts
 		else if(x>=0 && y>=0){
 			x_speed = x_speed - x_kraft;
 			y_speed = y_speed - y_kraft;
 		}
+		//Klick oben rechts
+		else if(x>=0 && y<=0){
+			x_speed = x_speed - x_kraft;
+			y_speed = y_speed + y_kraft;
+		}
 		//Klick oben links
 		else{
 			x_speed = x_speed + x_kraft;
-			y_speed = y_speed - y_kraft;
+			y_speed = y_speed + y_kraft;
 		}
+	}
+	
+	public void bewegen(){
+		//Abprallen des Balles an linken,rechten,oberen Rand
+		if((pos_x<(linkerRand+radius))||(pos_x>(rechterRand-radius))){
+			x_speed = x_speed*-1;
+		}
+		if(pos_y<(obererRand+radius)){
+			y_speed = y_speed*-1;
+		}
+		//Neue Position bestimmen
+		pos_x = pos_x+x_speed;
+		pos_y = pos_y+y_speed;
 	}
 		
