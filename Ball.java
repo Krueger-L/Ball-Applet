@@ -4,8 +4,8 @@ import javax.swing.*;
 
 public class Ball{
 
-	public int pos_x;
-	public int pos_y;
+	public double pos_x;
+	public double pos_y;
 	public double x_speed;
 	public double y_speed;
 	public int ballradius;
@@ -15,6 +15,7 @@ public class Ball{
 	public int rechterRand = 400;
 	public int obererRand = 0;
 	public double gravitation = 0.4;
+
 
 
 	public ImageIcon derBall = new ImageIcon("ball.gif");
@@ -92,7 +93,7 @@ public class Ball{
 		if((pos_x<(linkerRand+ballradius))||(pos_x>(rechterRand-ballradius))){
 			x_speed = x_speed*-1;
 		}
-		if(pos_y<(obererRand+radius)){
+		if(pos_y<(obererRand+ballradius)){
 			y_speed = y_speed*-1;
 		}
 		//Fallgeschwindigkeit/Zeit erhöhen
