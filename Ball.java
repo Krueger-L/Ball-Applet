@@ -4,33 +4,34 @@ import javax.swing.*;
 
 public class Ball{
 
-	public double pos_x;
-	public double pos_y;
-	public double x_speed;
-	public double y_speed;
+	public double pos_x; //Ballposition x-Achse
+	public double pos_y; //Ballposition y-Achse
+	public double x_speed; //horizontale Ballgeschwindigkeit
+	public double y_speed; //vertikale Ballgeschwindigkeit
 	public int ballradius;
-	public int klickflaeche = 200;
+	public int klickflaeche = 200; //Begrenzung des Spielfeldes
 	public int kraftProKlick = 10;
 	public int linkerRand = 0;
 	public int rechterRand = 400;
 	public int obererRand = 0;
-	public double gravitation = 0.4;
+	public double gravitation = 0.02;
+	public int count;
+	Color color;
 
+	public Ball( int pos_x, int pos_y, double x_speed, double y_speed, int ballradius, Color color, int count){
 
-
-	public ImageIcon derBall = new ImageIcon("ball.gif");
-
-	public Ball(ImageIcon derBall, int pos_x, int pos_y, double x_speed, double y_speed, int ballradius ){
-		this.derBall = derBall;
 		this.pos_x= pos_x;
 		this.pos_y= pos_y;
 		this.x_speed = x_speed;
 		this.y_speed = y_speed;
 		this.ballradius= ballradius;
+		this.color = color;
+		this.count = count; //bei Spielneustart reset auf 0
 
 
 	}
 	
+	//Ball getroffen?
 	public boolean getroffen(int maus_x, int maus_y){
 		// Bestimmen der Verbindungsvektoren
 		double x = maus_x - pos_x;
@@ -41,6 +42,7 @@ public class Ball{
 
 		// Wenn Distanz kleiner/gleich Ballradius && Klick in der Klickflaeche erfolgt, gilt der Ball als getroffen
 		if ((distance <= ballradius) && (maus_y >= klickflaeche)){
+			count++; //Trefferzaehler
 			return true;
 		}
 		else{
@@ -48,7 +50,8 @@ public class Ball{
 		}
 	}
 	
-	private void beschleunigen(int maus_x, int maus_y){
+	//Ballbeschleunigung bei erfolgtem Treffer
+	public void beschleunigen(int maus_x, int maus_y){
 		// Bestimmen der Abstaende
 		double x = maus_x - pos_x;
 		double y = maus_y - pos_y;
@@ -89,22 +92,41 @@ public class Ball{
 	}
 	
 	public void bewegen(){
-		//Abprallen des Balles an linken,rechten,oberen Rand
+		//Abprallen des Balles an linken,rechten,oberen Rand (verliert dabei an Geschwindigkeit)
 		if((pos_x<(linkerRand+ballradius))||(pos_x>(rechterRand-ballradius))){
-			x_speed = x_speed*-1;
+			x_speed = 0.7*x_speed*-1;
 		}
 		if(pos_y<(obererRand+ballradius)){
-			y_speed = y_speed*-1;
+			y_speed = 0.7*y_speed*-1;
 		}
-		//Fallgeschwindigkeit/Zeit erhöhen
+		//Fallgeschwindigkeit/Zeit erhÃ¶hen
 		y_speed = y_speed + gravitation;
 		//Neue Position bestimmen
 		pos_x = pos_x+x_speed;
 		pos_y = pos_y+y_speed;
 	}
 	
+	//hat der Ball den Boden berruehrt?
+	public boolean isOut(){
+		if (pos_y<600-ballradius){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	//Ball zeichnen
 	public void paintBall(Graphics g){
-	//	g.paintIcon(derBall, pos_x, pos_y, x_speed, y_speed, ballradius);
+		g.setColor (color);
+		int x = (int)pos_x - (int)ballradius;
+		int y = (int)pos_y - (int)ballradius;
+		g.fillOval (x, y, 2 * ballradius, 2 * ballradius);
 
+	}
+	
+	//Anzahl der Balltreffer abfragen
+	public int getCount(){
+		return count;
 	}
 }
