@@ -3,8 +3,7 @@ import java.util.*;
 import java.applet.*;
 import java.net.*;
 
-public class Main extends Applet implements Runnable
-{
+public class Main extends Applet implements Runnable{
 	// Deklarationen der Variablen
 	private int speed;				// Threadgeschwindigkeit
 	private int highscoreCount=0;
@@ -13,9 +12,9 @@ public class Main extends Applet implements Runnable
 	// Deklaration der Objektreferenz
 	private Ball ball;
 	//Thread
-	Thread th;						// Thread in dem das Spiel läuft
+	Thread th;						// Thread in dem das Spiel laeuft
 
-    // Variablen für die Doppelpufferung
+    // Variablen fuer die Doppelpufferung
 	private Image dbImage;
 	private Graphics dbg;
 
@@ -41,7 +40,7 @@ public class Main extends Applet implements Runnable
 
 	// Start - Methode, hier beginnt das Applet zu laufen
 	public void start (){
-		// Schaffen eines neuen Threads, in dem das Spiel läuft
+		// Schaffen eines neuen Threads, in dem das Spiel laeuft
 		th = new Thread (this);
 		th.start ();
 	}
@@ -53,7 +52,7 @@ public class Main extends Applet implements Runnable
 
 	// Auffangen des Mausereignisses mouseDown
 	public boolean mouseDown (Event e, int x, int y){
-		// Spiel läuft
+		// Spiel laeuft
 		if (!isStoped){
 			// Test ob Ball getroffen wurde
 			if (ball.getroffen (x, y)){
@@ -62,7 +61,7 @@ public class Main extends Applet implements Runnable
 		}
 		// Wenn Spiel noch nicht gestartet ist, oder wieder gestartet wird
 		else if (isStoped && e.clickCount == 2){
-		    // Alle wichtigen Werte zurücksetzen
+		    // Alle wichtigen Werte zuruecksetzen
 			isStoped = false;
 			init ();
 		}
@@ -83,14 +82,14 @@ public class Main extends Applet implements Runnable
 			repaint();
 
 			try{
-				// Stoppen des Threads für 10 Millisekunden
+				// Stoppen des Threads fuer 10 Millisekunden
 				Thread.sleep (speed);
 			}
 			catch (InterruptedException ex){
 				// nichts machen
 			}
 
-			// Zurücksetzen der ThreadPriority auf Maximalwert
+			// Zuruecksetzen der ThreadPriority auf Maximalwert
 			Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 		}
 	}
@@ -125,7 +124,7 @@ public class Main extends Applet implements Runnable
 			g.drawString ("Click-Highscore: "+highscoreCount,90, 170);
 			g.drawString ("Doppelklicken um neu zu starten", 20, 220);
 
-			isStoped = true;	// Zurücksetzen der isStoped Variablen, um wieder neu beginnen zu können
+			isStoped = true;	// Zuruecksetzen der isStoped Variablen, um wieder neu beginnen zu koennen
 		}
 	}
 
@@ -137,11 +136,11 @@ public class Main extends Applet implements Runnable
 			dbg = dbImage.getGraphics ();
 		}
 
-		// Bildschirm im Hintergrund löschen
+		// Bildschirm im Hintergrund loeschen
 		dbg.setColor (getBackground ());
 		dbg.fillRect (0, 0, this.getSize().width, this.getSize().height);
 
-		// Auf gelöschten Hintergrund Vordergrund zeichnen
+		// Auf geloeschten Hintergrund Vordergrund zeichnen
 		dbg.setColor (getForeground());
 		paint (dbg);
 
