@@ -93,10 +93,16 @@ public class Ball{
 	
 	public void bewegen(){
 		//Abprallen des Balles an linken,rechten,oberen Rand (verliert dabei an Geschwindigkeit)
-		if((pos_x<(linkerRand+ballradius))||(pos_x>(rechterRand-ballradius))){
+		if(pos_x<(linkerRand+ballradius)){
+			pos_x = linkerRand+ballradius;
+			x_speed = 0.7*x_speed*-1;
+		}
+		if(pos_x>(rechterRand-ballradius){
+			pos_x = rechterRand-ballradius;
 			x_speed = 0.7*x_speed*-1;
 		}
 		if(pos_y<(obererRand+ballradius)){
+			pos_y = obererRand+ballradius;
 			y_speed = 0.7*y_speed*-1;
 		}
 		//Fallgeschwindigkeit/Zeit erhöhen
